@@ -1,0 +1,98 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+template="/template/Template.xhtml">
+<ui:param name="page_name" value="Accueil" />
+<ui:define name="content">
+<h:panelGroup>
+<h:form enctype="multipart/form-data">
+<h:outputText value="Offer"/>
+</h:form >
+</h:panelGroup>
+
+<h:panelGroup columns="2">
+<h:form enctype="multipart/form-data">
+<table>
+<tr>
+<td><h:outputText value="Title"></h:outputText></td> 
+<td><h:inputText value="#{offersBean.title}"></h:inputText></td>
+</tr>
+<tr>
+<td><h:outputText value="description"></h:outputText></td> 
+<td><h:inputText value="#{offersBean.description}"></h:inputText></td>
+</tr>
+<tr>
+<td><h:outputText value="Price"></h:outputText></td>
+<td><h:inputText value="#{offersBean.priceOffer}"></h:inputText></td>
+</tr>
+<tr>
+<td><h:outputText value="Image"></h:outputText></td>
+<td><h:inputFile type="file" value="#{offersBean.file}"/></td>
+</tr>
+<tr>
+<td><h:outputText value="Category_client"></h:outputText></td>
+<td>
+<h:selectOneMenu value="#{offersBean.categoryClient}">
+<f:selectItem itemLabel="Choisir category" itemValue=" "/>
+<f:selectItems value="#{data.categoryClients}" />
+</h:selectOneMenu>
+</td>
+</tr>
+<tr>
+<td><h:outputText value="Time zone"></h:outputText></td>
+<td>
+<h:selectOneMenu value="#{offersBean.selectPeriodById}">
+<f:selectItem itemLabel="Choose..." />					
+<f:selectItems value="#{offersBean.periods}" var="p" itemValue="#{p.idPeriod}" itemLabel="#{p.titlePeriod}" />
+</h:selectOneMenu>
+</td>
+</tr>
+<tr><td colspan="2"> <h:commandButton value="create" action="#{offersBean.addOff()}" /></td></tr>
+<tr><td colspan="2"><h:commandButton value="Update" action="#{offersBean.updateOffre()}" /></td></tr>
+</table>
+</h:form>
+</h:panelGroup>
+
+<h:panelGroup columns="2">
+<h:form enctype="multipart/form-data">
+<h:dataTable value="#{offersBean.getAllOffers()}" var="item" border="1">
+<h:column><f:facet name="header"><h:outputText value="Title" /></f:facet>
+<h:outputText value="#{item.title}" /></h:column>
+<h:column><f:facet name="header"><h:outputText value="Description" /></f:facet>
+<h:outputText value="#{item.description}" /></h:column>
+<h:column><f:facet name="header"><h:outputText value="Offer image" /></f:facet>
+<img src="resources/Images/Offers/#{item.offreImage}" alt="Image" width="100"/></h:column>
+<h:column><f:facet name="header"><h:outputText value="Price" /></f:facet>
+<h:outputText value="#{item.priceOffer}" /></h:column>
+<h:column><f:facet name="header"><h:outputText value="Client category" /></f:facet>
+<h:outputText value="#{item.categoryClient}" /></h:column>
+<h:column><f:facet name="header"><h:outputText value="time zone" /></f:facet>
+<h:outputText value="From: "/>
+<h:outputText value="#{item.period.startDate}">
+<f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+</h:outputText>
+<h:outputText value=" TO "/>
+<h:outputText value="#{item.period.endDate}">
+<f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+</h:outputText>
+</h:column>
+<h:column>
+<h:commandButton action="#{offersBean.deleteOffer(item.idOffre)}" value="Delete" />
+</h:column>
+<h:column>
+<h:commandButton action="#{offersBean.displayOffre(item)}" value="Display to modify" />
+</h:column>
+<h:column>
+<h:commandButton  action="#{offersBean.ViewOffreDeatilsAdmin(item)}" value="view details" />
+</h:column>
+
+</h:dataTable>
+
+<h:commandButton id="btn1" value="Go Home" action="#{offersBean.GoHome()}" /><h:message for="btn"/>
+
+</h:form>
+</h:panelGroup>
+
+</ui:define>
+</ui:composition>

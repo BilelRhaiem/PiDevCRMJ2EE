@@ -1,0 +1,50 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+template="/template/Template.xhtml">
+<ui:param name="page_name" value="Accueil" />
+<ui:define name="content">
+<h:panelGroup>
+<h:form>
+<h:outputText value="Offer" /> |
+<h:commandButton id="btn" value="View Offers List" action="#{offersBean.ViewOfferList()}" /><h:message for="btn"/>
+</h:form>
+</h:panelGroup>
+<h:panelGroup columns="2">
+<h:form  enctype="multipart/form-data">
+<table>
+<tr><td><h:outputText value="Title"></h:outputText></td> 
+<td><h:inputText value="#{offersBean.title}"></h:inputText></td></tr>
+<tr><td><h:outputText value="description"></h:outputText></td> 
+<td><h:inputTextarea value="#{offersBean.description}"></h:inputTextarea></td></tr>
+<tr><td><h:outputText value="Price"></h:outputText></td>
+<td><h:inputText value="#{offersBean.priceOffer}"></h:inputText></td></tr>
+<tr><td><h:outputText value="Image"></h:outputText></td>
+<td><h:inputFile type="file" value="#{offersBean.file}"/></td></tr>
+<tr>
+<td><h:outputText value="Category_client"></h:outputText></td>
+<td>
+<h:selectOneMenu value="#{offersBean.categoryClient}">
+<f:selectItem itemLabel="Choisir category" itemValue=" "/>
+<f:selectItems value="#{data.categoryClients}" />
+</h:selectOneMenu>
+</td>
+</tr>
+<tr>
+<td><h:outputText value="Time zone"></h:outputText></td>
+<td>
+<h:selectOneMenu value="#{offersBean.selectPeriodById}">
+<f:selectItem itemLabel="Choose..." />					
+<f:selectItems value="#{offersBean.periods}" var="p" itemValue="#{p.idPeriod}" itemLabel="From : #{p.startDate} To #{p.endDate}" />
+</h:selectOneMenu>
+</td>
+</tr>
+<tr><td colspan="2"> <h:commandButton value="create" action="#{offersBean.addOff()}" /></td></tr>
+</table>
+</h:form>
+</h:panelGroup>
+
+
+</ui:define>
+</ui:composition>

@@ -1,0 +1,27 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/Template.xhtml">
+	<ui:param name="page_name" value="Accueil" />
+	<ui:define name="content">
+		<h:panelGroup>
+			<h:form>
+				<h:outputText value="Home" /> |
+<h:outputText value="Hello #{loginBean.client.email}"></h:outputText> |
+<h:commandLink value="Logout" action="#{loginBean.doLogout()}" />
+			</h:form>
+			<h:form>
+				<h:commandButton id="btn" value="View Offers List"
+					action="#{offersBean.ViewOfferList()}" />
+				<h:message for="btn" />
+				<h:commandButton id="btn1" value="View Time zone List"
+					action="#{periodesBean.ViewPeriodList()}" />
+				<h:message for="btn" />
+				<h:commandButton id="btn2" value="View List demanded offers"
+					action="#{offersBean.ViewDemandedOfferList()}" />
+				<h:message for="btn" />
+			</h:form>
+		</h:panelGroup>
+	</ui:define>
+</ui:composition>

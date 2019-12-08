@@ -1,0 +1,46 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:cc="http://java.sun.com/jsf/composite"
+xmlns:my="http://java.sun.com/jsf/composite/my"
+template="/template/Template.xhtml">
+<ui:param name="page_name" value="Accueil" />
+<ui:define name="content">
+<h:panelGroup>
+
+<h:form><h:outputText value="Bonjour #{loginBean.client.email}" />|
+<h:commandLink value="Déconnexion" action="#{loginBean.doLogout()}" />
+</h:form>
+</h:panelGroup>
+<h:panelGroup columns="2">
+<h:form enctype="multipart/form-data">
+<table>
+<tr>
+<td><h:outputText value="Title"></h:outputText></td> 
+<td><h:outputText value="#{offersBean.title}"></h:outputText></td>
+</tr>
+<tr>
+<td><h:outputText value="description"></h:outputText></td> 
+<td><h:outputText value="#{offersBean.description}"></h:outputText></td>
+</tr>
+<tr>
+<td><h:outputText value="Price"></h:outputText></td>
+<td><h:outputText value="#{offersBean.priceOffer}"></h:outputText></td>
+</tr>
+<tr>
+<td><h:outputText value="Nbr Demandes"></h:outputText></td>
+<td><h:outputText value="#{offersBean.demande}"></h:outputText></td>
+</tr>
+<tr>
+<td><h:outputText value="Image"></h:outputText></td>
+<td><img src="resources/Images/Offers/#{item.offreImage}" alt="Image" width="100"/></td>
+</tr>
+<tr><td><h:commandButton id="btn1" value="Go back"
+					action="#{offersBean.ViewOfferList()}" />
+				<h:message for="btn" /></td></tr>
+</table>
+</h:form>
+</h:panelGroup>
+</ui:define>
+</ui:composition>

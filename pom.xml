@@ -17,10 +17,10 @@
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <name>pidev</name>
+    <name>PiDevCRM</name>
     <modelVersion>4.0.0</modelVersion>
     <groupId>tn.esprit</groupId>
-    <artifactId>pidev</artifactId>
+    <artifactId>PiDevCRM</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
 
@@ -33,9 +33,9 @@
         </license>
     </licenses>
     <modules>
-        <module>pidev-ejb</module>
-        <module>pidev-web</module>
-        <module>pidev-ear</module>
+        <module>PiDevCRM-ejb</module>
+        <module>PiDevCRM-web</module>
+        <module>PiDevCRM-ear</module>
     </modules>
 
     <properties>
@@ -51,7 +51,7 @@
 
         <!-- Define the version of the JBoss BOMs we want to import to specify tested stacks. -->
         <version.jboss.bom>8.2.1.Final</version.jboss.bom>
-        <version.wildfly>11.0.0.final</version.wildfly>
+        <version.wildfly>11.0.0.Final</version.wildfly>
 
 
         <!-- other plugin versions -->
@@ -73,7 +73,7 @@
                 to repeat ourselves in every module -->
             <dependency>
                 <groupId>tn.esprit</groupId>
-                <artifactId>pidev-ejb</artifactId>
+                <artifactId>PiDevCRM-ejb</artifactId>
                 <version>${project.version}</version>
                 <type>ejb</type>
             </dependency>
@@ -82,7 +82,7 @@
                 ourselves in every module -->
             <dependency>
                 <groupId>tn.esprit</groupId>
-                <artifactId>pidev-web</artifactId>
+                <artifactId>PiDevCRM-web</artifactId>
                 <version>${project.version}</version>
                 <type>war</type>
                 <scope>compile</scope>

@@ -1,0 +1,54 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:cc="http://java.sun.com/jsf/composite"
+xmlns:my="http://java.sun.com/jsf/composite/my"
+template="/template/Template.xhtml">
+<ui:param name="page_name" value="Accueil" />
+<ui:define name="content">
+<h:panelGroup>
+<h:form>
+<h:outputText value="Time Zone" />
+<h:commandButton id="btn3" value="View timezone List" action="#{periodesBean.ViewPeriodList()}" /><h:message for="btn"/>
+</h:form>
+</h:panelGroup>
+<h:panelGroup columns="2">
+<h:form>
+<table>
+<tr><td><h:outputText value="Start date"></h:outputText></td> 
+<td><h:inputText id="StartDate" value="#{periodesBean.startDate}" required="true"></td></tr>
+<tr><td><h:outputText value="Start date"></h:outputText></td> 
+<td>
+<h:message for="StartDate" style="color:red"></h:message>
+<h:inputText id="StartDate" value="#{periodesBean.startDate}" required="true">
+<f:convertDateTime type="date" pattern="dd-MM-yyyy" />  
+</h:inputText>
+</td>
+</tr>
+<tr><td><h:outputText value="End Date"></h:outputText></td> 
+<td>
+<h:message for="EndDate" style="color:red"></h:message>
+<h:inputText id="EndDate" value="#{periodesBean.endDate}" required="true">
+<f:convertDateTime type="date" pattern="dd-MM-yyyy"/> 
+<f:validator validatorId="dateValidator" />
+</h:inputText>	
+</td>
+</tr>
+<tr>
+<td>
+<h:commandButton id="btn" value="Create" action="#{periodesBean.addPeriod()}" disabled="false"/>
+</td>
+<td>
+<my:if condition="#{periodesBean.endDate.before(periodesBean.startDate)}">
+	<f:facet name="then">
+	  <h:outputText value="the end date must be superieur than the start date"></h:outputText>
+	</f:facet>
+</my:if>
+</td>
+</tr>
+</table>		         
+</h:form>
+</h:panelGroup>
+</ui:define>
+</ui:composition>
