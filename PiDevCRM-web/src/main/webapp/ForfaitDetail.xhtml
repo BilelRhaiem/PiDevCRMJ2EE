@@ -1,0 +1,45 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+template="/template/Template.xhtml">
+<ui:param name="page_name" value="Accueil" />
+<ui:define name="content">
+<h:panelGroup>
+<h:form enctype="multipart/form-data">
+<h:outputText value="Offer"/>
+</h:form >
+</h:panelGroup>
+<h:panelGroup columns="2">
+<h:form enctype="multipart/form-data">
+<table>
+
+<tr>
+<td><h:outputText value="Numéro de téléphone :"></h:outputText></td> 
+<td><h:outputText value="#{forfaitBean.contact}"></h:outputText></td>
+</tr>
+
+<tr>
+<td><h:outputText value="Montant :"></h:outputText></td> 
+<td><h:outputText value="#{forfaitBean.montant}"></h:outputText></td>
+</tr>
+
+<tr>
+<td><h:outputText value="Forfait Internet :"></h:outputText></td> 
+<td><h:outputText value="#{forfaitBean.nbrMega}"></h:outputText></td>
+</tr>
+
+
+<tr>
+<td><h:outputText value="Type de paiement :"></h:outputText></td> 
+<td><h:outputText value="#{forfaitBean.typePaiement}"></h:outputText></td>
+</tr>
+
+<tr><td colspan="2"> <h:commandButton value="Confirmer" action="#{forfaitBean.goPaiement()}" /></td></tr>
+</table>
+</h:form>
+</h:panelGroup>
+
+
+</ui:define>
+</ui:composition>

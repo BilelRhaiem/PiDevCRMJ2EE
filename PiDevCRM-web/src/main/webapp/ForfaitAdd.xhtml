@@ -1,0 +1,281 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+template="/template/Template.xhtml">
+<ui:param name="page_name" value="Accueil" />
+<ui:define name="content">
+<h:panelGroup>
+<h:form>
+<h:outputText value="Forfait" /> |
+
+</h:form>
+</h:panelGroup>
+<h:panelGroup columns="2">
+<h:form  enctype="multipart/form-data">
+<script>
+
+
+    var i = 0;
+ <!--   function doIncrement() {
+        document.getElementById("#{forfaitBean.montant}").value = ++i;
+        viewVolumeData();
+    } -->
+    
+ <!--   function doDecrement() {
+        document.getElementById("#{forfaitBean.montant}").value = i;
+        viewVolumeData();
+    }  -->
+    
+    
+    function doIncrement() {
+        var $button = $(this);
+        var oldValue = $('#txtAmount').val();
+        var newVal = oldValue + 1;
+      
+            $('#txtAmount').val(newVal);
+            currentAmount = newVal;
+       
+        viewVolumeData();
+    } 
+   
+
+    function doDecrement() {
+        var $button = $(this);
+        var oldValue = $('#txtAmount').val();
+       
+            var newVal = parseFloat(oldValue) - 1;
+      
+
+        $('#txtAmount').val(newVal);
+        currentAmount = newVal;
+        viewVolumeData();
+    } 
+    
+  
+
+    function viewVolumeData() {
+        var newValue = $('#txtAmount').val();               
+        var VolumeData="";
+        switch(newValue) {
+            case "1":
+                VolumeData = "200" ;
+                break;
+            case "2":
+                VolumeData = "400" ;
+                break;
+            case "3":
+                VolumeData = "600" ;
+                break;
+            case "4":
+                VolumeData = "800" ;
+                break;
+            case "5":
+                VolumeData = "1122" ;
+                break;
+            case "6":
+                VolumeData = "1347" ;
+                break;
+            case "7":
+                VolumeData = "1571" ;
+                break;
+            case "8":
+                VolumeData = "1796" ;
+                break;
+            case "9":
+                VolumeData = "2309" ;
+                break;
+            case "10":
+                VolumeData = "2565" ;
+                break;
+            case "11":
+                VolumeData = "3292" ;
+                break;
+            case "12":
+                VolumeData = "3592" ;
+                break;
+            case "13":
+                VolumeData = "3891" ;
+                break;
+            case "14":
+                VolumeData = "4190" ;
+                break;
+            case "15":
+                VolumeData = "4490" ;
+                break;
+            case "16":
+                VolumeData = "5747" ;
+                break;
+            case "17":
+                VolumeData = "6106" ;
+                break;
+            case "18":
+                VolumeData = "6465" ;
+                break;
+            case "19":
+                VolumeData = "6825" ;
+                break;
+            case "20":
+                VolumeData = "8980" ;
+                break;
+            case "21":
+                VolumeData = "9429" ;
+                break;
+            case "22":
+                VolumeData = "9878" ;
+                break;
+            case "23":
+                VolumeData = "10327" ;
+                break;
+            case "24":
+                VolumeData = "10776" ;
+                break;
+            case "25":
+                VolumeData = "22451" ;
+                break;
+            case "26":
+                VolumeData = "23349" ;
+                break;
+            case "27":
+                VolumeData = "24247" ;
+                break;
+            case "28":
+                VolumeData = "25145" ;
+                break;
+            case "29":
+                VolumeData = "26043" ;
+                break;
+            case "30":
+                VolumeData = "26941" ;
+                break;
+            case "31":
+                VolumeData = "27839" ;
+                break;
+            case "32":
+                VolumeData = "28737" ;
+                break;
+            case "33":
+                VolumeData = "29635" ;
+                break;
+            case "34":
+                VolumeData = "30533" ;
+                break;
+            case "35":
+                VolumeData = "31431" ;
+                break;
+            case "36":
+                VolumeData = "32329" ;
+                break;
+            case "37":
+                VolumeData = "33227" ;
+                break;
+            case "38":
+                VolumeData = "34125" ;
+                break;
+            case "39":
+                VolumeData = "35023" ;
+                break;
+            case "40":
+                VolumeData = "35921" ;
+                break;
+            case "41":
+                VolumeData = "36820" ;
+                break;
+            case "42":
+                VolumeData = "39703" ;
+                break;
+            case "43":
+                VolumeData = "40648" ;
+                break;
+            case "44":
+                VolumeData = "41593" ;
+                break;
+            case "45":
+                VolumeData = "42539" ;
+                break;
+            case "46":
+                VolumeData = "43484" ;
+                break;
+            case "47":
+                VolumeData = "44429" ;
+                break;
+            case "48":
+                VolumeData = "45375" ;
+                break;
+            case "49":
+                VolumeData = "46320" ;
+                break;
+            case "50":
+                VolumeData = "47265" ;
+                break;           
+            default:
+                // code block
+        }
+        var myHiddenDataVolume = document.getElementById("#{forfaitBean.nbrMega}");
+        myHiddenDataVolume.value = VolumeData;
+        $('#txtVolumeData').val(VolumeData);
+    }
+
+ 
+
+</script>
+<table>
+<tr><td><h:outputText value="Contact"></h:outputText></td> 
+<td><h:inputText value="#{forfaitBean.contact}"></h:inputText></td></tr>
+<tr><td><h:outputText value="Montant en DT * :"></h:outputText></td>
+
+
+                    <td>
+                        <table>
+                            <tr>
+                                <td>
+                                    <input type="text" name="txtAmount" id="txtAmount" value="0" style="width:100px;"> </input>
+                                </td>
+                                <td>
+                                    <input type="button" class="btnIncDec" onclick="doIncrement()" value="+" />
+                                    <input type="button" class="btnIncDec" onclick="doDecrement()" value="-" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    
+                    
+ <!--                   
+<td><h:inputTextarea value="#{forfaitBean.montant}"></h:inputTextarea></td>
+                                <td>
+                                    <input type="button" class="btnIncDec" onclick="buttonClick()" value="+" />
+                                   
+                                </td> -->
+                                
+                                </tr>
+
+<!--  
+<tr><td><h:outputText value="Nombre de mega"></h:outputText></td>
+<td><h:inputText value="#{forfaitBean.nbrMega}"></h:inputText></td></tr>  -->
+
+
+                <tr>
+                    <td valign="top" style="padding-top: 22px;">
+                        <h:outputText value="Nombre de mega"></h:outputText>
+                    </td>
+                    <td >
+                       
+                        <input type="text" name="txtVolumeData"  id="txtVolumeData" value="0" style="width:100px;"></input><span> Mo</span>
+                    </td>
+                </tr>
+
+
+
+<tr><td colspan="2"> <h:commandButton value="create" action="#{forfaitBean.addForfait()}" /></td></tr>
+</table>
+</h:form>
+</h:panelGroup>
+
+
+</ui:define>
+</ui:composition>

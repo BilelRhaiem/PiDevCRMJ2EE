@@ -1,0 +1,93 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+template="/template/Template.xhtml">
+<ui:param name="page_name" value="Accueil" />
+<ui:define name="content">
+<h:panelGroup>
+<h:form enctype="multipart/form-data">
+<h:outputText value="Offer"/>
+</h:form >
+</h:panelGroup>
+<h:panelGroup columns="2">
+<h:form enctype="multipart/form-data">
+
+<hr></hr>
+<div align="center"> <h2>Résumé de la transaction</h2> </div>
+<hr></hr>
+<table>
+<!--  
+<tr>
+ <td width="187" height="30" bgcolor="#ffffff" class="cellule">
+		 <div align="left">
+		 <span class="titretab">date de la transaction</span>                                 
+		 </div>
+		 </td> 
+		 	 <td width="215" height="30" bgcolor="#ffffff">
+		 <div align="center">
+		 <p><webbot bot="Timestamp" S-Type="REGENERATED" S-Format="%d/%m/%Y"></webbot></p>
+		 
+		 </div>
+		 </td> 
+</tr>
+-->
+<tr>
+ <td width="187" height="30" bgcolor="#ffffff" class="cellule">
+		 <div align="left">
+		  <span class="titretab"><strong>Objet :</strong></span>                                 
+		 </div>
+		 </td> 
+		 	 <td width="215" height="30" bgcolor="#ffffff">
+		 <div align="center">
+		 <span class="style33">Recharge internet</span>
+		 </div>
+		 </td> 
+</tr>
+
+<tr>
+<td><p class="titretab"><strong>Montant à payer:</strong></p> </td>
+
+<td>
+<div align="center"><h:outputText value="#{forfaitBean.montant}"></h:outputText></div></td>
+</tr>
+
+</table>
+
+<hr></hr>
+<div align="center"> <h2>Pour payer saisir les données suivantes :</h2> </div>
+<hr></hr>
+<table>
+<tr>
+<td>
+<h:outputText value="Numéro de la carte *" />
+</td> 
+<td>    
+<h:inputText value="#{paiementBean.numCarte}" /> 
+</td>
+</tr>
+
+<tr>
+<td>
+<h:outputText value="Code secret * (8 chiffres)" />  
+</td>
+<td>  
+<h:inputSecret value="#{paiementBean.codeSecret}" /> 
+</td>
+</tr>
+
+<tr>
+<td>
+<h:commandButton id="btn" value="Payer" action="#{paiementBean.doPaiement()}" /><h:message for="btn"/>
+</td>
+<td>
+<h:commandButton id="btn1" value="Retour" action="#{porfaitBean.goDetail()}" /><h:message for="btn1"/>
+</td>
+</tr>
+</table>
+</h:form>
+</h:panelGroup>
+
+
+</ui:define>
+</ui:composition>
