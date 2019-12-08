@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:my="http://java.sun.com/jsf/composite/my"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	
+
+
+
+
+	 <ui:include src="/template/header.xhtml"/> 
+<body>
+
+		<h:panelGroup columns="2">
+			<h:form>
+
+				<table>
+					<tr>
+						<td><h:outputText value="Cause Rendez Vous : "></h:outputText></td>
+						<td><h:outputText
+								value="#{rendezVousBean.causeRendezVous}">
+								
+							</h:outputText></td>
+
+					</tr>
+					<tr>
+						<td><h:outputText value="Sujet : "></h:outputText></td>
+						<td><h:outputText value="#{rendezVousBean.sujet}"></h:outputText></td>
+					</tr>
+
+					<tr>
+						<td><h:outputText value=" date de demande :  "></h:outputText></td>
+						<td><h:outputText
+								value="#{rendezVousBean.demandeDate}">
+								
+							</h:outputText></td>
+					</tr>
+
+					<tr>
+						<td><h:outputText value="confirmation"></h:outputText></td>
+						<td><h:selectOneMenu value="#{rendezVousBean.confirmation}">
+								<f:selectItem itemLabel="" itemValue="" />
+								<f:selectItems value="#{data.conf}" />
+							</h:selectOneMenu></td>
+
+					</tr>
+					
+					<tr>
+						<td><h:outputText  value=" date de rendez vous "></h:outputText></td>
+						<td><h:inputText  
+								value="#{rendezVousBean.rendezVousDate}">
+								<f:convertDateTime  type="date"
+									pattern="dd-MM-yyyy" />
+				      
+							</h:inputText></td>
+					</tr>
+
+					<tr>
+
+						<td colspan="2"><h:commandButton 
+								value="modify RendezVous"
+								action="#{rendezVousBean.updateRendezVous()}" /></td>
+
+	<!---				
+<td>
+<my:if condition="#{rendezVousBean.rendezVousDate.after(rendezVousBean.demandeDate)}">
+	<f:facet name="then">
+	
+	  <h:outputText value="the meeting date must be superieur than the demande date"></h:outputText>
+	</f:facet>
+</my:if>
+</td> -->
+
+	  
+					</tr>
+
+				</table>
+
+			</h:form>
+		</h:panelGroup>
+
+
+
+		<h:panelGroup columns="2">
+			<h:form>
+				<h:dataTable value="#{rendezVousBean.rendezVous}" var="item"
+					border="1">
+
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="cause" />
+						</f:facet>
+						<h:outputText value="#{item.causeRendezVous}"></h:outputText>
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="sujet" />
+						</f:facet>
+						<h:outputText value="#{item.sujet}"></h:outputText>
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value=" date de demande " />
+						</f:facet>
+
+						<h:outputText value="#{item.demandeDate}">
+							<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+						</h:outputText>
+
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Confirmation" />
+						</f:facet>
+						<h:outputText value="#{item.confirmation}"></h:outputText>
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value=" date de rendez vous " />
+						</f:facet>
+
+						<h:outputText value="#{item.rendezVousDate}">
+							<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+						</h:outputText>
+
+					</h:column>
+
+
+
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Action" />
+						</f:facet>
+						<h:commandButton
+							action="#{rendezVousBean.removeRendezVous(item.idRendezVous)}"
+							value="Delete" />
+						<h:commandButton action="#{rendezVousBean.updateRendezVous()}"
+							value="modify" />
+						<h:commandButton
+							action="#{rendezVousBean.displayRendezVousAdmin(item)}"
+							value="Display to modify" />
+
+					</h:column>
+
+				</h:dataTable>
+			</h:form>
+		</h:panelGroup>
+		<ui:include src="/template/footer.xhtml"/> 
+</body>
+</html>
+
