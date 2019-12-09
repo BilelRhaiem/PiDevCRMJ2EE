@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+
+
+</h:head>
+<body id="page-top">
+	<div id="wrapper">
+		<ui:include src="/template/back-template/header.xhtml" />
+		<!-- Main Content -->
+
+
+		<!-- Topbar -->
+
+
+		<div class="container-fluid">
+
+			<h:panelGroup>
+				<h:form>
+					<div align="right">
+
+						<h:commandLink value="Logout" action="#{loginBean.doLogout()}" />
+
+					</div>
+					<div align="left">
+						<h:commandButton id="btn1" value="Go Home"
+							action="#{offersBean.GoHome()}" />
+						<h:message for="btn" />
+					</div>
+
+
+				</h:form>
+			</h:panelGroup>
+
+			<h:panelGroup>
+				<h:form enctype="multipart/form-data">
+
+				</h:form>
+			</h:panelGroup>
+
+			<h:panelGroup columns="2">
+				<h:form enctype="multipart/form-data">
+
+					<hr></hr>
+					<center>
+						<div align="center">
+
+							<h2>Create new Offer :</h2>
+
+						</div>
+					</center>
+					<hr></hr>
+					<center>
+						<table>
+							<tr>
+								<td><h:outputText value="Title"></h:outputText></td>
+								<td><h:inputText value="#{offersBean.title}"
+										required="true" requiredMessage="This input is required"></h:inputText></td>
+							</tr>
+							<tr>
+								<td><h:outputText value="description"></h:outputText></td>
+								<td><h:inputText value="#{offersBean.description}"
+										required="true" requiredMessage="This input is required"></h:inputText></td>
+							</tr>
+							<tr>
+								<td><h:outputText value="Price"></h:outputText></td>
+								<td><h:inputText value="#{offersBean.priceOffer}"
+										required="true" requiredMessage="This input is required"></h:inputText></td>
+							</tr>
+							<tr>
+								<td><h:outputText value="Image"></h:outputText></td>
+								<td><h:inputFile type="file" value="#{offersBean.file}" /></td>
+							</tr>
+							<tr>
+								<td><h:outputText value="Category_client"></h:outputText></td>
+								<td><h:selectOneMenu value="#{offersBean.categoryClient}"
+										required="true" requiredMessage="This input is required">
+										<f:selectItem itemLabel="Choisir category" itemValue=" " />
+										<f:selectItems value="#{data.categoryClients}" />
+									</h:selectOneMenu></td>
+							</tr>
+							<tr>
+								<td><h:outputText value="Time zone"></h:outputText></td>
+								<td><h:selectOneMenu value="#{offersBean.selectPeriodById}"
+										required="true" requiredMessage="This input is required">
+										<f:selectItem itemLabel="Choose..." />
+										<f:selectItems value="#{offersBean.periods}" var="p"
+											itemValue="#{p.idPeriod}" itemLabel="#{p.titlePeriod}" />
+									</h:selectOneMenu></td>
+							</tr>
+							<tr>
+								<td colspan="2"><h:commandButton value="create"
+										action="#{offersBean.addOff()}" /> <h:commandButton
+										value="Update" action="#{offersBean.updateOffre()}" /></td>
+							</tr>
+
+						</table>
+					</center>
+				</h:form>
+			</h:panelGroup>
+
+			<h:panelGroup columns="2">
+				<h:form enctype="multipart/form-data">
+					<center>
+						<hr></hr>
+						<div align="center">
+							<h2>List Offers :</h2>
+						</div>
+						<hr></hr>
+						<h:inputText id="search">
+							<f:ajax render="form" event="keyup"
+								listener="#{offersBean.recherche()}"></f:ajax>
+						</h:inputText>
+						<h:commandButton value="search"
+							actionListener="#{offersBean.recherche()}">
+							<f:ajax render="form"></f:ajax>
+						</h:commandButton>
+						<h:dataTable value="#{offersBean.getAllOffers()}" var="item"
+							border="1" id="search">
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Title" />
+								</f:facet>
+								<h:outputText value="#{item.title}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Description" />
+								</f:facet>
+								<h:outputText value="#{item.description}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Offer image" />
+								</f:facet>
+								<img src="resources/Images/Offers/#{item.offreImage}"
+									alt="Image" width="100" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Price" />
+								</f:facet>
+								<h:outputText value="#{item.priceOffer}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Client category" />
+								</f:facet>
+								<h:outputText value="#{item.categoryClient}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="time zone" />
+								</f:facet>
+								<h:outputText value="From: " />
+								<h:outputText value="#{item.period.startDate}">
+									<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+								</h:outputText>
+								<h:outputText value=" TO " />
+								<h:outputText value="#{item.period.endDate}">
+									<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+								</h:outputText>
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Actions" />
+								</f:facet>
+								<h:commandButton
+									action="#{offersBean.deleteOffer(item.idOffre)}" value="Delete" />
+
+								<h:commandButton action="#{offersBean.displayOffre(item)}"
+									value="Display to modify" />
+
+								<h:commandButton
+									action="#{offersBean.ViewOffreDeatilsAdmin(item)}"
+									value="view details" />
+							</h:column>
+
+						</h:dataTable>
+
+
+					</center>
+				</h:form>
+			</h:panelGroup>
+
+		</div>
+	</div>
+
+	<ui:include src="/template/back-template/footer.xhtml" />
+</body>
+</html>
+

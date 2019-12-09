@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+
+
+</h:head>
+<body id="page-top">
+	<div id="wrapper">
+		<ui:include src="/template/back-template/header.xhtml" />
+		<!-- Main Content -->
+
+
+		<!-- Topbar -->
+
+
+		<div class="container-fluid">
+
+			<h:panelGroup>
+
+				<h:form>
+					<div align="right">
+
+						<h:commandLink value="Logout" action="#{loginBean.doLogout()}" />
+
+					</div>
+				</h:form>
+				<h:form>
+					<center>
+						<h:commandButton id="btn" value="View Offers List"
+							action="#{offersBean.ViewOfferList()}" />
+						<h:message for="btn" />
+						<h:commandButton id="btn1" value="View Time zone List"
+							action="#{periodesBean.ViewPeriodList()}" />
+						<h:message for="btn" />
+						<h:commandButton id="btn2" value="View List demanded offers"
+							action="#{offersBean.ViewDemandedOfferList()}" />
+						<h:message for="btn" />
+					</center>
+				</h:form>
+			</h:panelGroup>
+
+		</div>
+	</div>
+
+	<ui:include src="/template/back-template/footer.xhtml" />
+</body>
+</html>
+

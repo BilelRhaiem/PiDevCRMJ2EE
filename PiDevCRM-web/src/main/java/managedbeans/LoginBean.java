@@ -36,7 +36,7 @@ public class LoginBean  implements Serializable{
 			loggedIn= true; 
 			}
 		else if(client!= null&& client.getClientType().equals("Admin")) {
-			navigateTo= "/AdminHome?faces-redirect=true";
+			navigateTo= "/pages/admin/AdminHome?faces-redirect=true";
 			loggedIn= true; 
 			}
 		else{

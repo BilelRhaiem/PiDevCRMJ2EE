@@ -27,8 +27,8 @@ public class DemandeOffreClient implements DemandeOffreClientRemote{
 
 
 	private static final String SMTP_SERVER = "smtp.gmail.com";
-	private static final String USERNAME = "mohamedamine.elhaddad@esprit.tn";
-	private static final String PASSWORD = "183JMT0057";
+	private static final String USERNAME = "haddadaminou@gamil.com";
+	private static final String PASSWORD = "All or nothing 123";
 	static final int PORT = 587;
 	
 	@PersistenceContext(unitName="primary")

@@ -1,8 +1,214 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-xmlns:f="http://java.sun.com/jsf/core"
-xmlns:h="http://java.sun.com/jsf/html"
-xmlns:ui="http://java.sun.com/jsf/facelets">
-<h:panelGroup>
-<b>En-tête</b>
-</h:panelGroup>
-</ui:composition>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+	<h:outputStylesheet name="css/bootstrap.min.css" />
+	<h:outputStylesheet name="css/slick.css" />
+	<h:outputStylesheet name="css/slick-theme.css" />
+
+	<!-- nouislider -->
+	<h:outputStylesheet name="css/nouislider.min.css" />
+
+	<!-- Font Awesome Icon -->
+	<h:outputStylesheet name="css/font-awesome.min.css" />
+
+	<!-- Custom stlylesheet -->
+	<h:outputStylesheet name="css/style.css" />
+
+	<h:outputScript src="js/jquery.min.js"></h:outputScript>
+
+	<h:outputScript src="js/bootstrap.min.js"></h:outputScript>
+
+	<h:outputScript src="js/slick.min.js"></h:outputScript>
+
+	<h:outputScript src="js/nouislider.min.js"></h:outputScript>
+
+	<h:outputScript src="js/jquery.zoom.min.js"></h:outputScript>
+
+	<h:outputScript src="js/main.js"></h:outputScript>
+
+</h:head>
+<body>
+	<header>
+		<!-- TOP HEADER -->
+
+		<div id="top-header">
+
+			<div class="container">
+
+				<ul class="header-links pull-left">
+
+
+
+					<li><h3 class="footer-title" style="color: white;">
+							<h:outputText value="#{loginBean.client.email}"></h:outputText>
+						</h3></li>
+
+
+
+				</ul>
+
+				<ul >
+
+
+
+					<li></li>
+				</ul>
+			</div>
+		</div>
+		<!-- /TOP HEADER -->
+		<!-- MAIN HEADER -->
+
+		<div id="header">
+			<!-- container -->
+
+			<div class="container">
+				<!-- row -->
+
+				<div class="row">
+					<!-- LOGO -->
+
+					<div class="col-md-3">
+
+						<div class="header-logo">
+							<a href="#" class="logo"> <img src="./img/logo.png" alt="" />
+							</a>
+						</div>
+					</div>
+					<!-- /LOGO -->
+					<!-- SEARCH BAR -->
+
+
+					<!-- /SEARCH BAR -->
+					<!-- ACCOUNT -->
+
+					<div class="col-md-3 clearfix">
+
+						<div class="header-ctn">
+							<!-- Wishlist -->
+
+							
+							<!-- /Wishlist -->
+							<!-- Cart -->
+
+							<div class="dropdown">
+								
+
+								<div class="cart-dropdown">
+
+									<div class="cart-list">
+
+										<div class="product-widget">
+
+											<div class="product-img">
+												<img src="./img/product01.png" alt="" />
+											</div>
+
+											<div class="product-body">
+
+												<h3 class="product-name">
+													<a href="#">product name goes here</a>
+												</h3>
+
+												<h4 class="product-price">
+													<span class="qty">1x</span>$980.00
+												</h4>
+											</div>
+											<button class="delete">
+												<i class="fa fa-close" />
+											</button>
+										</div>
+
+										<div class="product-widget">
+
+											<div class="product-img">
+												<img src="./img/product02.png" alt="" />
+											</div>
+
+											<div class="product-body">
+
+												<h3 class="product-name">
+													<a href="#">product name goes here</a>
+												</h3>
+
+												<h4 class="product-price">
+													<span class="qty">3x</span>$980.00
+												</h4>
+											</div>
+											<button class="delete">
+												<i class="fa fa-close" />
+											</button>
+										</div>
+									</div>
+
+									<div class="cart-summary">
+										<small>3 Item(s) selected</small>
+
+										<h5>SUBTOTAL: $2940.00</h5>
+									</div>
+
+									<div class="cart-btns">
+										<a href="#">View Cart</a> <a href="#">Checkout <i
+											class="fa fa-arrow-circle-right" /></a>
+									</div>
+								</div>
+							</div>
+							<!-- /Cart -->
+							<!-- Menu Toogle -->
+
+							<div class="menu-toggle">
+								<a href="#"> <i class="fa fa-bars" /> <span>Menu</span>
+								</a>
+							</div>
+							<!-- /Menu Toogle -->
+						</div>
+					</div>
+					<!-- /ACCOUNT -->
+				</div>
+				<!-- row -->
+			</div>
+			<!-- container -->
+		</div>
+		<!-- /MAIN HEADER -->
+	</header>
+	<!-- /HEADER -->
+	<!-- NAVIGATION -->
+	<nav id="navigation">
+		<!-- container -->
+
+		<div class="container">
+			<!-- responsive-nav -->
+
+			<div id="responsive-nav">
+				<!-- NAV -->
+
+				<ul class="main-nav nav navbar-nav">
+
+					
+
+					<!-- <h:form>
+						<h:commandButton id="btn" value="View Offers List"
+							action="#{offersBean.ViewOfferList()}" />
+						<h:message for="btn" /> | <h:commandButton id="btn1"
+							value="View Time zone List"
+							action="#{periodesBean.ViewPeriodList()}" />
+						<h:message for="btn" />
+
+						 <h:commandButton id="btn2" value="View List demanded offers"
+							action="#{offersBean.ViewDemandedOfferList()}" />
+						<h:message for="btn" />
+					</h:form> -->
+				</ul>
+				<!-- /NAV -->
+			</div>
+			<!-- /responsive-nav -->
+		</div>
+		<!-- /container -->
+	</nav>
+
+
+</body>
+</html>

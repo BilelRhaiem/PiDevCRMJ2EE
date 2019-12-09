@@ -16,35 +16,34 @@ import model.Offre;
 @Stateless
 @LocalBean
 public class OfferService implements OfferServiceRemote {
-	
 
-	@PersistenceContext(unitName="primary")
+	@PersistenceContext(unitName = "primary")
 	EntityManager em;
-	
+
 	@Override
 	public int addOffre(Offre o) {
 		em.persist(o);
- 		return o.getIdOffre();
+		return o.getIdOffre();
 	}
 
 	@Override
 	public void deleteOffre(int IdOffer) {
-		Offre o = em.find(Offre.class,IdOffer);
+		Offre o = em.find(Offre.class, IdOffer);
 		em.remove(o);
-		
+
 	}
 
 	@Override
 	public void updateOffre(Offre o) {
-		Offre off = em.find(Offre.class, o.getIdOffre()); 
-		off.setTitle(o.getTitle()); 
+		Offre off = em.find(Offre.class, o.getIdOffre());
+		off.setTitle(o.getTitle());
 		off.setDescription(o.getDescription());
 		off.setCategoryClient(o.getCategoryClient());
 		off.setPriceOffer(o.getPriceOffer());
 		off.setPeriod(o.getPeriod());
 
 	}
-	
+
 	@Override
 	public void updateDemandeOffre(Offre off) {
 
@@ -54,73 +53,76 @@ public class OfferService implements OfferServiceRemote {
 		query.executeUpdate();
 	}
 
-	
-
 	@Override
 	public List<Offre> getAllOffre() {
-		
-		TypedQuery<Offre> offers = em.createQuery("SELECT f FROM Offre f ", Offre.class);		
+
+		TypedQuery<Offre> offers = em.createQuery("SELECT f FROM Offre f ", Offre.class);
 		List<Offre> results = offers.getResultList();
-		return results; 
+		return results;
 	}
 
 	@Override
-	public List<Offre> getAllOffreByGategory(String category) {
-		TypedQuery<Offre> query = em.createQuery("SELECT Offre.categoryClient from Offre where Offer.categoryClient=:x ", Offre.class);
-		query.setParameter("x", category);
-		List<Offre> listoffre = new ArrayList<>();
-		listoffre = query.getResultList();
-		return listoffre;
+	public List<Offre> getAllOffreByGategory(String title) {
+		Query query = em
+				.createQuery("SELECT o from Offre o where o.title like :title ", Offre.class);
+		query.setParameter("title","%" + title + "%");
+		if(query.getResultList().isEmpty())
+			return new ArrayList<Offre>();
+		
+		return (List<Offre>)query.getResultList();
 	}
 
 	@Override
-	public Offre getOffreByCategory(String category) {
-		TypedQuery<Offre> query = em.createQuery("select o from Offre o where o.categoryClient=:category", Offre.class);
-		query.setParameter("categoryClient", category);
-		Offre offer = null;
-		try {
-			offer = query.getSingleResult();
-		} catch (Exception e) {
-			System.out.println("Erreur : " + e);
-		}
+	public List<Offre> getOffreByCategory(String category) {
+		Query q = em.createQuery("select e from Offre e where e.categoryClient like :category ");
+		q.setParameter("category", "%" + category + "%");
 
-		return offer;
+		if (q.getResultList().isEmpty())
+			return new ArrayList<Offre>();
+
+		return (List<Offre>) q.getResultList();
 	}
-
 
 	@Override
 	public List<Offre> getAllOffreByGategoryClientPhysique() {
-		TypedQuery<Offre> query = em.createQuery("SELECT o from Offre o where o.categoryClient='Client_physique' and o.period!=null and o.period.endDate > CURRENT_TIMESTAMP ", Offre.class);
+		TypedQuery<Offre> query = em.createQuery(
+				"SELECT o from Offre o where o.categoryClient='Client_physique' and o.period!=null and o.period.endDate > CURRENT_TIMESTAMP ",
+				Offre.class);
 		List<Offre> results = query.getResultList();
-		return results; 
+		return results;
 	}
 
 	@Override
 	public List<Offre> getAllOffreByGategoryEntreprise() {
-		TypedQuery<Offre> query = em.createQuery("SELECT o from Offre o where o.categoryClient='Entreprise' and o.period!=null and o.period.endDate > CURRENT_TIMESTAMP", Offre.class);
+		TypedQuery<Offre> query = em.createQuery(
+				"SELECT o from Offre o where o.categoryClient='Entreprise' and o.period!=null and o.period.endDate > CURRENT_TIMESTAMP",
+				Offre.class);
 		List<Offre> results = query.getResultList();
-		return results; 
+		return results;
 	}
 
 	@Override
 	public Long NberDemandeOffre(int IdOffre) {
-		TypedQuery<Long> query = em.createQuery("Select DISTINCT count(*) from  OffreClient oc where oc.id.offre_IdOffre=:IdOffre", Long.class);
-		
-		query.setParameter("IdOffre", IdOffre);		
+		TypedQuery<Long> query = em.createQuery(
+				"Select DISTINCT count(*) from  OffreClient oc where oc.id.offre_IdOffre=:IdOffre", Long.class);
+
+		query.setParameter("IdOffre", IdOffre);
 		return query.getSingleResult();
-	
+
 	}
 
 	@Override
 	public int getOffreById(int IdOffer) {
 		Offre offre = em.find(Offre.class, IdOffer);
-		
+
 		return offre.getIdOffre();
 	}
 
 	@Override
 	public List<Offre> getAllDemandedOffres() {
-		TypedQuery<Offre> query = em.createQuery("SELECT o from Offre o, OffreClient oc, Client c where oc.id.offre_IdOffre=o.idOffre and oc.id.client_IdClient=c.idClient", Offre.class);
+		TypedQuery<Offre> query = em.createQuery(
+				"SELECT o from Offre o, OffreClient oc, Client c where oc.id.offre_IdOffre=o.idOffre and oc.id.client_IdClient=c.idClient",
+				Offre.class);
 		List<Offre> results = query.getResultList();
 		return results;
 	}
@@ -128,12 +130,26 @@ public class OfferService implements OfferServiceRemote {
 	@Override
 	public Long CountEntreprise() {
 
-		TypedQuery<Long> query = em.createQuery("select count(*) from Client o where o.clientType='Entreprise'", Long.class);
+		TypedQuery<Long> query = em.createQuery("select count(*) from Client o where o.clientType='Entreprise'",
+				Long.class);
 		return query.getSingleResult();
-		
-		//return nbr;
+
+		// return nbr;
 	}
 
-	
+	/*public Integer getAllDemandedOffresChart() {
+		TypedQuery<Offre> query = em.createQuery(
+				"SELECT o from Offre o, OffreClient oc, Client c where oc.id.offre_IdOffre=o.idOffre and oc.id.client_IdClient=c.idClient",
+				Offre.class);
+		List<Offre> results = query.getResultList();
+		return query.getResultList().size();
+	}
+
+	public Integer getAllOffreChart() {
+
+		TypedQuery<Offre> offers = em.createQuery("SELECT f FROM Offre f ", Offre.class);
+		List<Offre> results = offers.getResultList();
+		return offers.getResultList().size();
+	}*/
 
 }

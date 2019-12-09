@@ -17,7 +17,7 @@ public interface OfferServiceRemote {
 	public List<Offre> getAllOffreByGategory(String category);
 	public List<Offre> getAllOffreByGategoryClientPhysique();
 	public List<Offre> getAllOffreByGategoryEntreprise();
-	public Offre getOffreByCategory(String category);
+	public List<Offre> getOffreByCategory(String category);
 	public void updateDemandeOffre(Offre off);
 	public Long NberDemandeOffre(int IdOffer);
 	public List<Offre> getAllDemandedOffres();

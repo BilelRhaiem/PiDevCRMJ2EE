@@ -46,7 +46,7 @@ public class PeriodesBean implements Serializable{
 	
 	public String ViewPeriodList() {
 		String navigateTo= "null";
-		navigateTo= "/PeriodsViews/ListPeriodsAdmin?faces-redirect=true";
+		navigateTo= "/pages/admin/PeriodsViews/ListPeriodsAdmin?faces-redirect=true";
 		return navigateTo;
 	}
 	
@@ -66,13 +66,8 @@ public class PeriodesBean implements Serializable{
      public void addPeriod(){ 
 		 Period period =new Period(StartDate,EndDate,TitlePeriod);
 		 //String today = java.time.LocalDate.now().toString();
-		 if(EndDate.before(StartDate)) {
+		 if(EndDate.after(StartDate)) {
 			 Pservice.addPeriod(period);
-		 }
-		 else {
-			 FacesMessage msg =new FacesMessage(FacesMessage.SEVERITY_ERROR,
-		               "Invalid start/end dates.",
-		               "Start date cannot be after end date.");
 		 }
 		 
 		

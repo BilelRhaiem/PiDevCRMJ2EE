@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+
+
+</h:head>
+<body id="page-top">
+	<div id="wrapper">
+		<ui:include src="/template/back-template/header.xhtml" />
+		<!-- Main Content -->
+
+		
+			<!-- Topbar -->
+
+		
+			<div class="container-fluid">
+
+				<h:panelGroup>
+			<h:form>
+				<div align="right">
+				
+				<h:commandLink value="Logout" action="#{loginBean.doLogout()}"  />
+				
+				</div>
+
+			</h:form>
+		</h:panelGroup>
+		<h:panelGroup>
+			<h:form enctype="multipart/form-data">
+				<h3>Offers</h3>
+			</h:form>
+		</h:panelGroup>
+		<h:panelGroup columns="2">
+			<h:form enctype="multipart/form-data">
+			<center>
+				<h:dataTable value="#{offersBean.getAllDemandedOffers()}" var="item"
+					border="1">
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Title" />
+						</f:facet>
+						<h:outputText value="#{item.title}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Description" />
+						</f:facet>
+						<h:outputText value="#{item.description}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Offer image" />
+						</f:facet>
+						<img src="resources/Images/Offers/#{item.offreImage}" alt="Image"
+							width="100" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Price" />
+						</f:facet>
+						<h:outputText value="#{item.priceOffer}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Client category" />
+						</f:facet>
+						<h:outputText value="#{item.categoryClient}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Client" />
+						</f:facet>
+						<h:outputText value="#{offersBean.client.email}" />
+					</h:column>
+
+				</h:dataTable>
+
+				<h:commandButton id="btn1" value="Go Home"
+					action="#{offersBean.GoHome()}" />
+				<h:message for="btn" />
+</center>
+			</h:form>
+		</h:panelGroup>
+			</div>
+		</div>
+	
+	<ui:include src="/template/back-template/footer.xhtml" />
+</body>
+</html>
+
