@@ -15,6 +15,7 @@ public interface ClientServiceRemote {
 	public void supprimerClientById(int Id);
 	public void updateClient(Client client);
 	public List<Client> getAllClient();
+	public Client getClientByEmailAndPassword(String email, String password); 
 	
 	
 }

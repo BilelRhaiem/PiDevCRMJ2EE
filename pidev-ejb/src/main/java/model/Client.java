@@ -36,8 +36,23 @@ public class Client implements Serializable {
 		this.password = password;
 		this.phoneNumber = phoneNumber;
 	}
+	
+	
 
 	
+	public Client(int idClient, String email, String lastName, String name, String password, String phoneNumber) {
+		super();
+		this.idClient = idClient;
+		this.email = email;
+		this.lastName = lastName;
+		this.name = name;
+		this.password = password;
+		this.phoneNumber = phoneNumber;
+	}
+
+
+
+
 	public Client(Date birthDate, String email, String lastName, String name, String password,
 			String phoneNumber) {
 		super();

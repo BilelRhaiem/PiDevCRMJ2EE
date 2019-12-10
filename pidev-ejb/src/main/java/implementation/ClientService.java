@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -37,6 +36,7 @@ public class ClientService implements ClientServiceRemote {
 		c.setEmail(client.getEmail());
 		c.setName(client.getName());
 		c.setLastName(client.getLastName());
+		c.setPassword(client.getPassword());
 		c.setPhoneNumber(client.getPhoneNumber());
 	}
 
@@ -44,8 +44,38 @@ public class ClientService implements ClientServiceRemote {
 	public List<Client> getAllClient() {
 		TypedQuery<Client> clients = em.createQuery("SELECT c FROM Client c",Client.class);
 		List<Client> clientsRes = clients.getResultList();
-		return null;
+		return clientsRes;
 	}
+	
+	public Integer getAllClientPhyisque(){
+		TypedQuery<Client> clientPhysiques = em.createQuery("Select c from Client c where c.clientType=1",Client.class);
+		List<Client> clientPhysiquesRes = clientPhysiques.getResultList();
+		return clientPhysiques.getResultList().size();
+	}
+	
+	public Integer getAllEntreprise(){
+		TypedQuery<Client> clientPhysiques = em.createQuery("Select c from Client c where c.clientType=0",Client.class);
+		List<Client> clientPhysiquesRes = clientPhysiques.getResultList();
+		return clientPhysiques.getResultList().size();
+	}
+
+	@Override
+	public Client getClientByEmailAndPassword(String email, String password) {
+		TypedQuery<Client> query = 
+				em.createQuery("select e from Client e WHERE e.email=:email and e.password=:password ", Client.class); 
+				query.setParameter("email", email); 
+				query.setParameter("password", password); 
+				Client client = null; 
+				try {
+					client = query.getSingleResult(); 
+				}
+				catch (Exception e) {
+					System.out.println("Erreur : " + e);
+				}
+				return client;
+	}
+	
+
 	
 	
 	

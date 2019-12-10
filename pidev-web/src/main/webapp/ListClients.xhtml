@@ -1,0 +1,40 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:f="http://java.sun.com/jsf/core"
+ xmlns:h="http://java.sun.com/jsf/html"
+ xmlns:ui="http://java.sun.com/jsf/facelets" template="/Template/Template.xhtml">
+ <ui:param name="page_name" value="Accueil" /> 
+<ui:define name="content">
+<h:panelGroup>
+<h:form enctype="multipart/form-data">
+<h:outputText value="Clients"/>
+</h:form >
+</h:panelGroup>
+
+<h:panelGroup columns="2">
+<h:form enctype="multipart/form-data">
+<h:dataTable value="#{clientBean.getAllClient()}" var="item" border="1">
+<h:column><f:facet name="header"><h:outputText value="Name" /></f:facet>
+<h:outputText value="#{item.name}" /></h:column>
+<h:column><f:facet name="header"><h:outputText value="Last Name" /></f:facet>
+<h:outputText value="#{item.lastName}" /></h:column>
+<h:column><f:facet name="header"><h:outputText value="Birth Date" /></f:facet>
+<h:outputText value="#{item.birthDate}" /></h:column>
+<h:column><f:facet name="header"><h:outputText value="Client Type" /></f:facet>
+<h:outputText value="#{item.clientType}" /></h:column>
+<h:column><f:facet name="header"><h:outputText value="Email" /></f:facet>
+<h:outputText value="#{item.email}" /></h:column>
+<h:column><f:facet name="header"><h:outputText value="Password" /></f:facet>
+<h:outputText value="#{item.password}" /></h:column>
+<h:column><f:facet name="header"><h:outputText value="Phone Number" /></f:facet>
+<h:outputText value="#{item.phoneNumber}" /></h:column>
+
+<h:column>
+<h:commandButton action="#{clientBean.deleteClient(item.idClient)}" value="Delete"></h:commandButton>
+</h:column>
+</h:dataTable>
+
+
+</h:form>
+</h:panelGroup>
+</ui:define>
+</ui:composition>
